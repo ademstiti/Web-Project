@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In — ZeRo</title>
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/auth.css">
+</head>
+<body>
+
+<div class="auth-page">
+
+  
+  <div class="auth-left">
+    <div class="auth-brand-mark">
+      <svg class="brand-logo-svg" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="boltGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%"   stop-color="#a89cf7"/>
+            <stop offset="100%" stop-color="#7c6ef5"/>
+          </linearGradient>
+        </defs>
+        <circle cx="60" cy="60" r="56" stroke="rgba(124,110,245,0.3)" stroke-width="1.5" fill="none"/>
+        <circle cx="60" cy="60" r="46" stroke="rgba(124,110,245,0.15)" stroke-width="1" fill="none"/>
+        <path d="M68 14 L38 64 L56 64 L46 106 L82 52 L63 52 Z"
+              fill="url(#boltGrad)" stroke="rgba(255,255,255,0.2)" stroke-width="1" stroke-linejoin="round"/>
+      </svg>
+      <div class="brand-name">ZeRo</div>
+      <div class="brand-tagline">Just post it</div>
+    </div>
+  </div>
+
+  
+  <div class="auth-right">
+    <div class="auth-right-inner">
+
+      <h1 class="auth-heading">Sign in<br>to ZeRo.</h1>
+
+      <div id="login-error" class="auth-error hidden"></div>
+
+      <form id="login-form" class="auth-form" novalidate>
+        <div class="form-group">
+          <label for="login-email">Email</label>
+          <input type="email" id="login-email" placeholder="you@example.com" autocomplete="email">
+        </div>
+        <div class="form-group">
+          <label for="login-password">Password</label>
+          <div class="input-wrap">
+            <input type="password" id="login-password" placeholder="••••••••" autocomplete="current-password">
+            <button type="button" class="toggle-pw" data-target="login-password" aria-label="Toggle password visibility">Show</button>
+          </div>
+        </div>
+        <button type="submit" class="auth-btn-primary">Sign In →</button>
+      </form>
+
+      <div class="auth-switch">
+        Don't have an account? <a href="register.html">Create one</a>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<script src="js/auth.js"></script>
+<script>document.addEventListener("DOMContentLoaded", initLoginPage);</script>
+</body>
+</html>
