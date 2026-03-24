@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home — ZeRo</title>
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/feed.css">
+</head>
+<body>
+
+  <nav class="nav">
+    <a href="feed.html" class="nav-logo">
+      <span>ZeRo</span>
+    </a>
+
+    <div class="nav-actions">
+      <a id="nav-profile-link" href="profile.html" class="nav-profile-btn">
+        <img id="nav-avatar" src="assets/default-avatar.svg" alt="Your avatar">
+        <span id="nav-username">Me</span>
+      </a>
+      <a href="index.html" class="nav-btn-ghost">Log out</a>
+    </div>
+  </nav>
+
+  <div class="feed-layout">
+
+
+    <main class="feed-main">
+
+      <section class="composer">
+        <div class="composer-inner">
+          <img id="composer-avatar" src="assets/default-avatar.svg" alt="Your avatar" class="composer-avatar">
+          <div class="composer-body">
+            <textarea
+              id="post-input"
+              class="composer-input"
+              placeholder="What's on your mind?"
+              maxlength="280"
+              rows="1"
+            ></textarea>
+            <div class="composer-footer">
+              <span id="post-char-count" class="char-count">0 / 280</span>
+              <button id="post-btn" class="btn-post" disabled>Post</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="feed-divider"></div>
+
+      <section id="feed-list" class="feed-list">
+        <p class="empty-state" id="empty-feed-msg">Follow some users to see their posts here, or make your first post above!</p>
+      </section>
+
+    </main>
+
+    <aside class="sidebar-right">
+      <div class="suggestions-card">
+        <h3 class="suggestions-title">Who to follow</h3>
+        <ul id="suggestions-list" class="suggestions-list">
+          <li class="suggestions-empty">No suggestions yet.</li>
+        </ul>
+      </div>
+    </aside>
+
+  </div>
+  <script src="js/feed.js"></script>
+</body>
+</html>

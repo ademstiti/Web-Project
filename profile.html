@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile — ZeRo</title>
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/profile.css">
+</head>
+<body>
+
+  <nav class="nav">
+    <a href="feed.html" class="nav-logo">
+      <span>ZeRo</span>
+    </a>
+
+    <div class="nav-actions">
+      <a href="feed.html" class="nav-link">Home</a>
+      <a href="index.html" class="nav-btn-ghost">Log out</a>
+    </div>
+  </nav>
+
+  <main class="profile-layout">
+
+    <article class="profile-card">
+
+      <div class="profile-cover" id="profile-cover">
+        <div class="cover-gradient"></div>
+      </div>
+
+      <div class="profile-top-row">
+        <div class="profile-avatar-wrap">
+          <img id="profile-avatar" src="assets/default-avatar.svg" alt="Avatar">
+        </div>
+        <div class="profile-action-btns">
+          <button id="edit-profile-btn" class="btn-secondary hidden">Edit Profile</button>
+          <button id="follow-btn" class="btn-primary hidden">Follow</button>
+        </div>
+      </div>
+
+      <div class="profile-info">
+        <h1 id="profile-username" class="profile-username">Username</h1>
+        <p id="profile-handle" class="profile-handle">@handle</p>
+        <p id="profile-bio" class="profile-bio">No bio yet.</p>
+
+        <form id="edit-bio-form" class="edit-bio-form hidden">
+          <textarea id="bio-input" class="bio-textarea" maxlength="160" placeholder="Write something about yourself…"></textarea>
+          <div class="edit-bio-actions">
+            <span id="bio-char-count" class="char-count">0 / 160</span>
+            <button type="button" id="cancel-edit-btn" class="btn-ghost-small">Cancel</button>
+            <button type="submit" class="btn-primary-small">Save</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="profile-stats">
+        <div class="stat">
+          <span id="stat-posts" class="stat-number">0</span>
+          <span class="stat-label">Posts</span>
+        </div>
+        <div class="stat">
+          <span id="stat-followers" class="stat-number">0</span>
+          <span class="stat-label">Followers</span>
+        </div>
+        <div class="stat">
+          <span id="stat-following" class="stat-number">0</span>
+          <span class="stat-label">Following</span>
+        </div>
+      </div>
+
+    </article>
+
+    <section class="profile-posts-section">
+      <h2 class="posts-section-title">Posts</h2>
+      <div id="profile-post-list" class="profile-post-list">
+        <p class="empty-state" id="no-posts-msg">No posts yet.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="js/profile.js"></script>
+</body>
+</html>
