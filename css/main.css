@@ -1,3 +1,5 @@
+
+
 @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap');
 
 :root {
@@ -49,7 +51,6 @@ a {
 a:hover { color: var(--accent); }
 
 /*  Scrollbar  */
-
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: #000; }
 ::-webkit-scrollbar-thumb {
@@ -58,7 +59,6 @@ a:hover { color: var(--accent); }
 }
 ::-webkit-scrollbar-thumb:hover { background: #4f4f6e; }
 
-/*  Utility  */
 .hidden { display: none !important; }
 .sr-only {
   position: absolute;

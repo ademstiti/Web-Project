@@ -184,6 +184,48 @@
   .auth-right { padding: 36px 20px; }
 }
 
+/* Avatar upload */
+.avatar-upload-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.avatar-preview-wrap {
+  position: relative;
+  width: 72px;
+  height: 72px;
+}
+
+.avatar-preview-wrap img {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: #0a0a0a;
+  display: block;
+}
+
+.avatar-upload-btn {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 24px;
+  height: 24px;
+  background: #1a1a1a;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  cursor: pointer;
+  line-height: 1;
+}
+
 /*  Show/Hide Password  */
 .input-wrap {
   position: relative;
