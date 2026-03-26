@@ -69,8 +69,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 const postCard = document.createElement("div");
                 postCard.className = "post-card";
 
-                const isLiked = (post.likes || []).includes(freshUser.id);
-                const likeCount = (post.likes || []).length;
+                const likesArray = Array.isArray(post.likes) ? post.likes : [];
+                const isLiked = likesArray.includes(freshUser.id);
+                const likeCount = likesArray.length;
 
                 postCard.innerHTML = `
                     <div class="post-header">
@@ -124,28 +125,34 @@ document.addEventListener("DOMContentLoaded", () => {
     function renderSuggestions() {
         const freshUser = getFreshCurrUser();
         const users = getUsers();
-        const followedUserIds = freshUser.following || [];
-        const suggestions = users.filter(user => user.id !== freshUser.id && !followedUserIds.includes(user.id)).slice(0, 5);
 
         suggestionsList.innerHTML = "";
-        if (suggestions.length === 0) {
-            suggestionsList.innerHTML = '<li class="suggestions-empty">No suggestions yet.</li>';
-        } else {
-            suggestions.forEach(user => {
-                const li = document.createElement("li");
-                li.className = "suggestion-item";
-                li.innerHTML = `
-                    <img src="assets/default-avatar.svg" alt="${user.username}" class="suggestion-avatar">
-                    <div class="suggestion-info">
-                        <a href="#" class="suggestion-name">${user.username}</a>
-                        <span class="suggestion-handle">@${user.username}</span>
-                    </div>
-                    <button class="btn-follow-small" onclick="followUser(${user.id})">Follow</button>
-                `;
-                suggestionsList.appendChild(li);
+        users.forEach(user => {
+            if (user.id === freshUser.id) 
+                return; 
+            const li = document.createElement("li");
+            li.className = "suggestion-item";
+
+             const isFollowing = (freshUser.following || []).includes(user.id);
+             let buttonText = "Follow";
+             let action = `followUser(${user.id})`;
+
+             if (isFollowing) {
+                buttonText = "Unfollow";
+                action = `unfollowUser(${user.id})`;
+             }
+
+             li.innerHTML = `<img src="assets/default-avatar.svg" class="suggestion-avatar">
+            <div class="suggestion-info">
+                <span>${user.username}</span>
+            </div>
+            <button onclick="${action}">${buttonText}</button>
+        `;
+
+        suggestionsList.appendChild(li);
             });
         }
-    }
+
 
     // Delete post
     window.deletePost = function(postId) {
@@ -241,6 +248,28 @@ document.addEventListener("DOMContentLoaded", () => {
         renderFeed();
         renderSuggestions();
     };
+
+    function unfollowUser(userId) {
+        let currUser = getCurrentUser();
+        let users = getUsers();
+        currUser.following = currUser.following.filter(id => id !== userId);
+
+        users = users.map(user => {
+            if (user.id === currUser.id) {
+                return currUser;
+            }
+            if (user.id === userId) {
+                user.followers = user.followers.filter(id => id !== currUser.id);
+            }
+            return user;
+        });
+        setCurrentUser(currUser);
+        saveUsers(users);
+        renderSuggestions();
+        renderFeed();   
+
+    }
+    window.unfollowUser = unfollowUser;
 
     // Initial render
     renderFeed();
