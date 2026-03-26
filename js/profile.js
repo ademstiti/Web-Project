@@ -24,6 +24,58 @@ document.addEventListener("DOMContentLoaded", function() {
         profilePostList.appendChild(postDiv);
     });
 
+    const editUsernameBtn = document.getElementById('edit-username-btn');
+    const usernameEditSection = document.getElementById('username-edit-section');
+    const profileUsername = document.getElementById('profile-username');
+
+    editUsernameBtn.classList.remove('hidden');
+    editUsernameBtn.addEventListener('click', function() {
+        usernameEditSection.classList.remove('hidden');
+        profileUsername.classList.add('hidden');
+        editUsernameBtn.classList.add('hidden');
+    });
+
+    document.getElementById('cancel-username-edit').addEventListener('click', function() {
+        usernameEditSection.classList.add('hidden');
+        profileUsername.classList.remove('hidden');
+        editUsernameBtn.classList.remove('hidden');
+    });
+
+    document.getElementById('save-username-btn').addEventListener('click', function() {
+        const newUsername = document.getElementById('username-input').value.trim();
+        
+        if (newUsername === "") {
+            alert("Username cannot be empty.");
+            return;
+        }
+
+        if (isUsernameTaken(newUsername)) {
+            alert("This username is already taken. Please choose another one.");
+            return;
+        }
+
+        currUser.username = newUsername;
+        setCurrentUser(currUser);
+
+        document.getElementById('profile-username').textContent = newUsername;
+        
+        usernameEditSection.classList.add('hidden');
+        profileUsername.classList.remove('hidden');
+        editUsernameBtn.classList.remove('hidden');
+        
+        alert("Username updated successfully!");
+    });
+
+    function isUsernameTaken(username) {
+        const users = getUsers();
+        for (let i = 0; i < users.length; i++) {
+            if (users[i].username === username) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     const editBTN = document.getElementById("edit-profile-btn");
     const editForm = document.getElementById("edit-bio-form");
     const bioInput = document.getElementById("bio-input");
