@@ -59,11 +59,13 @@ document.addEventListener("DOMContentLoaded", ()=> {
         const email = document.getElementById("login-email").value.trim();
         const password = document.getElementById("login-password").value.trim();
 
+        clearError("login-error");
+
         const users = getUsers();
         const user = users.find(u => u.email === email && u.password === password);
 
         if(!user) {
-            showError("register-error", "incorrect email or password");
+            showError("login-error", "incorrect email or password");
             return;
         }
 
