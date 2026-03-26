@@ -84,15 +84,11 @@ document.addEventListener("DOMContentLoaded", () => {
                     <div class="post-content">${post.content}</div>
                     <div class="post-footer">
                         <button class="post-action ${isLiked ? 'liked' : ''}" onclick="likePost(${post.id})">
-                            <svg viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                            </svg>
+                            <p>❤</p>
                             ${likeCount}
                         </button>
                         <button class="post-action" onclick="toggleComments(${post.id})">
-                            <svg viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-                            </svg>
+                            <p>📩</p>
                             ${(post.comments || []).length}
                         </button>
                         ${post.userId === freshUser.id ? `<button class="post-delete-btn" onclick="deletePost(${post.id})">Delete</button>` : ''}
@@ -110,6 +106,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                     <div class="comment-body">
                                         <div class="comment-author">${c.username}</div>
                                         <div class="comment-text">${c.text}</div>
+                                        <div class="comment-time"> ${c.timestamp || ""}</div>
                                     </div>
                                 </div>
                             `).join('')}
@@ -201,7 +198,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (!post.comments) post.comments = [];
                 post.comments.push({
                     username: freshUser.username,
-                    text: text
+                    text: text,
+                    timestamp: new Date().toISOString()
                 });
             }
             return post;

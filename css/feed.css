@@ -472,6 +472,11 @@
   line-height: 1.7;
 }
 
+.comment small {
+  color: #888;
+  font-size: 12px;
+}
+
 .hidden { display: none !important; }
 
 @media (max-width: 1024px) {
