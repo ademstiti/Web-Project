@@ -364,6 +364,12 @@
   word-break: break-word;
 }
 
+.comment-time {
+  font-size: 0.65rem;
+  color: rgba(255, 255, 255, 0.35);
+  margin-top: 3px;
+}
+
 .sidebar-right {
   padding: 28px 0 28px 16px;
   position: sticky;

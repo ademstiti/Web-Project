@@ -106,7 +106,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                     <div class="comment-body">
                                         <div class="comment-author">${c.username}</div>
                                         <div class="comment-text">${c.text}</div>
-                                        <div class="comment-time"> ${c.timestamp || ""}</div>
+                                        <div class="comment-time"> ${c.timestamp ? new Date(c.timestamp).toLocaleDateString() : ""}</div>
                                     </div>
                                 </div>
                             `).join('')}
