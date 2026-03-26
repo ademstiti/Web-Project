@@ -14,17 +14,7 @@
   <!-- LEFT: Branding -->
   <div class="auth-left">
     <div class="auth-brand-mark">
-      <svg class="brand-logo-svg" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id="boltGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%"   stop-color="#a89cf7"/>
-            <stop offset="100%" stop-color="#7c6ef5"/>
-          </linearGradient>
-        </defs>
-        <circle cx="60" cy="60" r="56" stroke="rgba(124,110,245,0.3)" stroke-width="1.5" fill="none"/>
-        <circle cx="60" cy="60" r="46" stroke="rgba(124,110,245,0.15)" stroke-width="1" fill="none"/>
-        <path d="M68 14 L38 64 L56 64 L46 106 L82 52 L63 52 Z"
-              fill="url(#boltGrad2)" stroke="rgba(255,255,255,0.2)" stroke-width="1" stroke-linejoin="round"/>
+        <circle cx="60" cy="60" r="54" stroke="rgba(124,110,245,0.8)" stroke-width="2" fill="rgba(124,110,245,0.08)"/>
       </svg>
       <div class="brand-name">ZeRo</div>
       <div class="brand-tagline">Join today</div>
@@ -39,15 +29,7 @@
 
       <form id="register-form" class="auth-form" novalidate>
 
-        <div class="avatar-upload-group">
-          <div class="avatar-preview-wrap">
-            <img id="avatar-preview" src="assets/default-avatar.svg" alt="Profile picture preview">
-            <label for="avatar-input" class="avatar-upload-btn" title="Upload photo">📷</label>
-            <input type="file" id="avatar-input" accept="image/*" class="sr-only">
-          </div>
-          <span style="font-size:0.75rem;color:rgba(255,255,255,0.3);">Profile photo (optional)</span>
-        </div>
-
+        
         <div class="form-group">
           <label for="reg-username">Username</label>
           <input type="text" id="reg-username" placeholder="cooluser_99" maxlength="20">
@@ -60,10 +42,7 @@
 
         <div class="form-group">
           <label for="reg-password">Password</label>
-          <div class="input-wrap">
-            <input type="password" id="reg-password" placeholder="Min. 8 characters">
-            <button type="button" class="toggle-pw" data-target="reg-password" aria-label="Toggle password visibility">Show</button>
-          </div>
+          <input type="password" id="reg-password" placeholder="Min. 8 characters">
           <div class="password-strength">
             <div class="strength-bar" id="sb1"></div>
             <div class="strength-bar" id="sb2"></div>
@@ -75,10 +54,7 @@
 
         <div class="form-group">
           <label for="reg-confirm">Confirm Password</label>
-          <div class="input-wrap">
-            <input type="password" id="reg-confirm" placeholder="Repeat your password">
-            <button type="button" class="toggle-pw" data-target="reg-confirm" aria-label="Toggle password visibility">Show</button>
-          </div>
+          <input type="password" id="reg-confirm" placeholder="Repeat your password">
         </div>
 
         <button type="submit" class="auth-btn-primary">Create Account →</button>
