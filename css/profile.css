@@ -74,7 +74,7 @@
 .profile-cover {
   position: relative;
   height: 160px;
-  background: linear-gradient(135deg, #1a1030 0%, #0d0d0d 50%, #111126 100%);
+  background: purple;
   border-radius: 20px 20px 0 0;
 }
 
