@@ -40,14 +40,24 @@
         <p id="profile-handle" class="profile-handle">@handle</p>
         <p id="profile-bio" class="profile-bio">No bio yet.</p>
 
-        <form id="edit-bio-form" class="edit-bio-form hidden">
-          <textarea id="bio-input" class="bio-textarea" maxlength="160" placeholder="Write something about yourself…"></textarea>
-          <div class="edit-bio-actions">
-            <button type="button" id="cancel-edit-btn" class="btn-ghost-small">Cancel</button>
-            <button type="submit" class="btn-primary-small">Save</button>
-          </div>
-        </form>
+        <div class="profile-action-btns">
+          <button id="edit-username-btn" class="btn-secondary hidden">Edit Username</button>
+        </div>
+
+        <div id="username-edit-section" class="hidden">
+          <span>New Username: </span>
+          <span id="username-input" contenteditable="true" class="editable-username"></span>
+          <button id="save-username-btn" class="btn-primary-small">Save</button>
+          <button id="cancel-username-edit" class="btn-ghost-small">Cancel</button>
+        </div>
       </div>
+      <form id="edit-bio-form" class="edit-bio-form hidden">
+        <textarea id="bio-input" class="bio-textarea" maxlength="160" placeholder="Write something about yourself…"></textarea>
+        <div class="edit-bio-actions">
+          <button type="button" id="cancel-edit-btn" class="btn-ghost-small">Cancel</button>
+          <button type="submit" class="btn-primary-small">Save</button>
+        </div>
+      </form>
 
       <div class="profile-stats">
         <div class="stat">
