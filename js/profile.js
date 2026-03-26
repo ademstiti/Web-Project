@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     document.getElementById("profile-username").textContent = currUser.username;
     document.getElementById("profile-handle").textContent = "@" + currUser.username;
-    document.getElementById("profile-bio").textContent = currUser.bio;
+    document.getElementById("profile-bio").textContent = currUser.bio || "No bio yet.";
 
     const userPosts = posts.filter(post => post.userId === currUser.id);
     document.getElementById("stat-posts").textContent = userPosts.length;
@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", function() {
             return user;
         });
         saveUsers(users);
-        bioText.textContent = newBio;
+        bioText.textContent = newBio || "No bio yet.";
         editForm.classList.add("hidden");
     });
 

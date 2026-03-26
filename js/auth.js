@@ -8,12 +8,22 @@ document.addEventListener("DOMContentLoaded", ()=> {
             const password = document.getElementById("reg-password").value.trim();
             const confirmPassword = document.getElementById("reg-confirm").value.trim();
 
+            clearError("register-error")
+
             if (!username || !email || !password || !confirmPassword) {
-                alert("please fill in all fields");
+                showError("register-error" ,"please fill in all fields");
                 return; 
             }
+            if (password.length < 8) {
+                showError("register-error", "Password must be at least 8 characters");
+                return;
+            }
+            if (!/[A-Z]/.test(password)) {
+                showError("register-error", "Password must contain at least one uppercase letter");
+                return;
+            }
             if (password !== confirmPassword) {
-                alert("passwords do not match");
+                showError("register-error", "passwords do not match");
                 return;
             }
             
@@ -21,7 +31,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
 
             const usedEmail = users.find(user => user.email === email);
             if(usedEmail) {
-                alert("email is already used");
+                showError("register-error", "email is already used");
                 return;
             }
 
@@ -38,7 +48,6 @@ document.addEventListener("DOMContentLoaded", ()=> {
             users.push(newuser);
             saveUsers(users);
 
-            alert("account created");
             window.location.href = "index.html";
 
         });
@@ -54,15 +63,26 @@ document.addEventListener("DOMContentLoaded", ()=> {
         const user = users.find(u => u.email === email && u.password === password);
 
         if(!user) {
-            alert("incorrect email or password");
+            showError("register-error", "incorrect email or password");
             return;
         }
 
         setCurrentUser(user);
-        alert("login successful");
         window.location.href = "feed.html";
 
 
     });
+}
+
+function showError(elementId,message) {
+    const errorDiv = document.getElementById(elementId);
+    errorDiv.textContent = message;
+    errorDiv.classList.remove("hidden");
+}
+
+function clearError(elementId) {
+    const errorDiv = document.getElementById(elementId);
+    errorDiv.textContent = "";
+    errorDiv.classList.add("hidden");
 }
 });

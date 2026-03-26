@@ -6,15 +6,10 @@
   --accent:          #7c6ef5;
   --accent-soft:     #a89cf7;
   --accent-hover:    #6a5ce3;
-
-  --success:         #4ade80;
   --danger:          #f87171;
-  --warning:         #fbbf24;
-
   --text-primary:    #f0eeff;
   --text-secondary:  #8b8aaa;
   --text-muted:      #4f4f6e;
-
   --radius-full:     9999px;
   --transition:      0.2s ease;
 }
@@ -60,12 +55,6 @@ a:hover { color: var(--accent); }
 ::-webkit-scrollbar-thumb:hover { background: #4f4f6e; }
 
 .hidden { display: none !important; }
-.sr-only {
-  position: absolute;
-  width: 1px; height: 1px;
-  overflow: hidden;
-  clip: rect(0,0,0,0);
-}
 
 /*  Form Elements  */
 .form-group {
