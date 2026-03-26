@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const freshUser = getFreshCurrUser();
         const posts = getPosts();
         const followedUserIds = freshUser.following || [];
-        const feedPosts = posts.filter(post => followedUserIds.includes(post.userId) || post.userId === freshUser.id);
+        const feedPosts = posts.filter(post => followedUserIds.includes(post.userId) || post.userId === freshUser.id).reverse();
 
         feedList.innerHTML = "";
         if (feedPosts.length === 0) {
