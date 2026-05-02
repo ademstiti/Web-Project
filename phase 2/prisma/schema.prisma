@@ -1,0 +1,96 @@
+// ============================================================
+// schema.prisma — ZeRo Social Media Platform
+// Database: SQLite (file-based, no setup needed)
+// ORM: Prisma
+// ============================================================
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./zero.db"
+}
+
+// ── User ─────────────────────────────────────────────────────
+model User {
+  id        Int      @id @default(autoincrement())
+  username  String   @unique
+  email     String   @unique
+  password  String
+  bio       String   @default("")
+  avatar    String   @default("")
+  createdAt DateTime @default(now())
+
+  // Relations
+  posts     Post[]
+  likes     Like[]
+  comments  Comment[]
+
+  // Follow system — a user can follow many and be followed by many
+  followers Follow[] @relation("following") // people who follow this user
+  following Follow[] @relation("follower")  // people this user follows
+}
+
+// ── Post ──────────────────────────────────────────────────────
+model Post {
+  id        Int      @id @default(autoincrement())
+  content   String
+  createdAt DateTime @default(now())
+
+  // Foreign key
+  authorId  Int
+  author    User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
+
+  // Relations
+  likes     Like[]
+  comments  Comment[]
+}
+
+// ── Like ──────────────────────────────────────────────────────
+model Like {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+
+  // Foreign keys
+  userId    Int
+  postId    Int
+
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  // A user can only like a post once
+  @@unique([userId, postId])
+}
+
+// ── Comment ───────────────────────────────────────────────────
+model Comment {
+  id        Int      @id @default(autoincrement())
+  content   String
+  createdAt DateTime @default(now())
+
+  // Foreign keys
+  userId    Int
+  postId    Int
+
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+}
+
+// ── Follow ────────────────────────────────────────────────────
+model Follow {
+  id          Int      @id @default(autoincrement())
+  createdAt   DateTime @default(now())
+
+  // Who is doing the following
+  followerId  Int
+  follower    User     @relation("follower", fields: [followerId], references: [id], onDelete: Cascade)
+
+  // Who is being followed
+  followingId Int
+  following   User     @relation("following", fields: [followingId], references: [id], onDelete: Cascade)
+
+  // A user can only follow another user once
+  @@unique([followerId, followingId])
+}
