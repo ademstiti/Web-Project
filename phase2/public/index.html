@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In — ZeRo</title>
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/auth.css">
+</head>
+<body>
+
+<div class="auth-page">
+
+  
+  <div class="auth-left">
+    <div class="auth-brand-mark">
+      <img src="assets/Zero_purple.png" alt="ZeRo logo" class="brand-logo-svg">
+      <div class="brand-name">ZeRo</div>
+      <div class="brand-tagline">Just post it</div>
+    </div>
+  </div>
+
+  
+  <div class="auth-right">
+    <div class="auth-right-inner">
+
+      <h1 class="auth-heading">Sign in<br>to ZeRo.</h1>
+
+      <div id="login-error" class="auth-error hidden"></div>
+
+      <form id="login-form" class="auth-form" novalidate>
+        <div class="form-group">
+          <label for="login-email">Email</label>
+          <input type="email" id="login-email" placeholder="you@example.com" autocomplete="email">
+        </div>
+        <div class="form-group">
+          <label for="login-password">Password</label>
+          <input type="password" id="login-password" placeholder="••••••••" autocomplete="current-password">
+        </div>
+        <button type="submit" class="auth-btn-primary">Sign In →</button>
+      </form>
+
+      <div class="auth-switch">
+        Don't have an account? <a href="register.html">Create one</a>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<script src="js/storage.js"></script>
+<script src="js/auth.js"></script>
+</body>
+</html>
