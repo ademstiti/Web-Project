@@ -76,16 +76,13 @@ export async function deleteFollow(followerId, followingId) {
 
 
 export async function getFeed(userId) {
-  const followedUsers = await prisma.follow.findMany({
-    where: { followerId: Number(userId) },
-    select: { followingId: true },
-  });
-
-  const followedIds = followedUsers.map((f) => f.followingId);
-  const visibleAuthorIds = [...followedIds, Number(userId)];
-
-  const posts = await prisma.post.findMany({
-    where: { authorId: { in: visibleAuthorIds } },
+  return prisma.post.findMany({
+    where: {
+      OR: [
+        { author: { followers: { some: { followerId: Number(userId) } } } },
+        { authorId: Number(userId) },
+      ],
+    },
     orderBy: { createdAt: "desc" },
     include: {
       author: { select: { id: true, username: true, avatar: true } },
@@ -96,8 +93,6 @@ export async function getFeed(userId) {
       },
     },
   });
-
-  return posts;
 }
 
 export async function createPost(content, authorId) {
@@ -160,4 +155,68 @@ export async function deleteComment(commentId, userId) {
   await prisma.comment.delete({ where: { id: Number(commentId) } });
 
   return comment;
+}
+//  Statistics 
+
+export async function getTotals() {
+  const [users, posts, likes, comments] = await Promise.all([
+    prisma.user.count(),
+    prisma.post.count(),
+    prisma.like.count(),
+    prisma.comment.count(),
+  ]);
+  return { users, posts, likes, comments };
+}
+
+export async function getMostActiveUser() {
+  return prisma.user.findFirst({
+    orderBy: { posts: { _count: "desc" } },
+    select: {
+      id: true,
+      username: true,
+      avatar: true,
+      _count: { select: { posts: true } },
+    },
+  });
+}
+
+export async function getMostLikedPost() {
+  return prisma.post.findFirst({
+    orderBy: { likes: { _count: "desc" } },
+    select: {
+      id: true,
+      content: true,
+      author: { select: { username: true } },
+      _count: { select: { likes: true } },
+    },
+  });
+}
+
+export async function getMostCommentedPost() {
+  return prisma.post.findFirst({
+    orderBy: { comments: { _count: "desc" } },
+    select: {
+      id: true,
+      content: true,
+      author: { select: { username: true } },
+      _count: { select: { comments: true } },
+    },
+  });
+}
+
+export async function getAvgFollowers() {
+  const [totalFollows, totalUsers] = await Promise.all([
+    prisma.follow.count(),
+    prisma.user.count(),
+  ]);
+  if (totalUsers === 0) return "0.00";
+  return (totalFollows / totalUsers).toFixed(2);
+}
+
+export async function getNewestUsers() {
+  return prisma.user.findMany({
+    orderBy: { createdAt: "desc" },
+    take: 5,
+    select: { id: true, username: true, avatar: true, createdAt: true },
+  });
 }
