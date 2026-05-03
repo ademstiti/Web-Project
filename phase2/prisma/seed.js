@@ -1,15 +1,10 @@
-// ============================================================
-// seed.js — Populate ZeRo database with demo data
-// Run with: npm run db:seed
-// ============================================================
-
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
 async function main() {
   console.log('🌱 Seeding database...');
 
-  // ── Clear existing data (order matters due to foreign keys) ──
+  // Clear existing data
   await prisma.like.deleteMany();
   await prisma.comment.deleteMany();
   await prisma.follow.deleteMany();
@@ -17,7 +12,7 @@ async function main() {
   await prisma.user.deleteMany();
   console.log('🗑️  Cleared existing data');
 
-  // ── Create Users ─────────────────────────────────────────────
+  // Create Users
   const users = await Promise.all([
     prisma.user.create({
       data: {
@@ -87,7 +82,7 @@ async function main() {
 
   console.log(`✅ Created ${users.length} users`);
 
-  // ── Create Posts ─────────────────────────────────────────────
+  // Create Posts
   const posts = await Promise.all([
     prisma.post.create({ data: { content: 'Just shipped my first Next.js app! The routing system is so clean 🚀', authorId: users[0].id, createdAt: new Date('2026-04-01T10:00:00Z') }}),
     prisma.post.create({ data: { content: 'Flexbox vs Grid — both have their place. Stop the war 😂 Use the right tool for the job.', authorId: users[1].id, createdAt: new Date('2026-04-02T11:00:00Z') }}),
@@ -108,7 +103,7 @@ async function main() {
 
   console.log(`✅ Created ${posts.length} posts`);
 
-  // ── Create Follows ────────────────────────────────────────────
+  // Create Follows
   const followPairs = [
     [0, 1], [0, 2], [0, 4], [0, 5],
     [1, 0], [1, 2], [1, 7],
@@ -133,7 +128,7 @@ async function main() {
 
   console.log(`✅ Created ${followPairs.length} follows`);
 
-  // ── Create Likes ──────────────────────────────────────────────
+  // Create Likes
   const likePairs = [
     [1, 0], [2, 0], [3, 0], [4, 0], [5, 0],
     [0, 1], [2, 1], [3, 1],
@@ -165,7 +160,7 @@ async function main() {
 
   console.log(`✅ Created ${likePairs.length} likes`);
 
-  // ── Create Comments ───────────────────────────────────────────
+  // Create Comments
   const commentsData = [
     { userIdx: 1, postIdx: 0,  content: 'Next.js is amazing! Which version are you using?' },
     { userIdx: 2, postIdx: 0,  content: 'Congrats! Keep building 🔥' },
@@ -208,7 +203,7 @@ async function main() {
 
   console.log(`✅ Created ${commentsData.length} comments`);
 
-  // ── Summary ───────────────────────────────────────────────────
+  // Summary
   console.log('\n🎉 Database seeded successfully!');
   console.log('─────────────────────────────────');
   console.log(`👤 Users:    ${users.length}`);
